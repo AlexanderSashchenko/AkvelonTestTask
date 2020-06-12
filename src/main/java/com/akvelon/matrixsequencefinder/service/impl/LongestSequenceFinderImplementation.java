@@ -13,8 +13,8 @@ public class LongestSequenceFinderImplementation implements LongestSequenceFinde
 
     private int[][] rotateMatrix(int[][] matrix) {
         int highestRowElements = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
+        for (int[] ints : matrix) {
+            for (int j = 0; j < ints.length; j++) {
                 int currentRowElements = j + 1;
                 if (currentRowElements > highestRowElements) {
                     highestRowElements = currentRowElements;
@@ -22,7 +22,7 @@ public class LongestSequenceFinderImplementation implements LongestSequenceFinde
             }
         }
         int[][] rotatedMatrix = new int[highestRowElements][matrix.length];
-        for(int i = 0; i < matrix.length; i++) {
+        for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 rotatedMatrix[j][i] = matrix[i][j];
             }
@@ -33,13 +33,14 @@ public class LongestSequenceFinderImplementation implements LongestSequenceFinde
     private int getLongestSequence(int[][] matrix) {
         int longestSequence = 0;
         int currentSequence = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 1) {
+        for (int[] ints : matrix) {
+            for (int anInt : ints) {
+                if (anInt == 1) {
                     currentSequence++;
-                }
-                else if (currentSequence > longestSequence) {
-                    longestSequence = currentSequence;
+                } else {
+                    if (currentSequence > longestSequence) {
+                        longestSequence = currentSequence;
+                    }
                     currentSequence = 0;
                 }
             }
