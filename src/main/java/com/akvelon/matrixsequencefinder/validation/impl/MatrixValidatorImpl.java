@@ -10,17 +10,17 @@ public class MatrixValidatorImpl implements ConstraintValidator<MatrixValidator,
     @Override
     public boolean isValid(MatrixDto matrixDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-        if (!matrixDto.getMatrix().getClass().isArray()) {
-            return false;
-        }
-        int[][] matrix = matrixDto.getMatrix();
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] != 0 || matrix[i][j] != 1) {
-                    return false;
+        try {
+            for (int[] ints : matrixDto.getMatrix()) {
+                for (int anInt : ints) {
+                    if (anInt != 0 && anInt != 1) {
+                        return false;
+                    }
                 }
             }
+        } catch (Exception exception) {
+            return false;
         }
-        return false;
+        return true;
     }
 }

@@ -2,10 +2,10 @@ package com.akvelon.matrixsequencefinder.controller;
 
 import com.akvelon.matrixsequencefinder.model.MatrixDto;
 import com.akvelon.matrixsequencefinder.service.LongestSequenceFinder;
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import javax.validation.Valid;
 
 @RestController
 public class ApplicationController {
@@ -16,7 +16,8 @@ public class ApplicationController {
     }
     
     @PostMapping("/matrix-input")
-    public int findLongestSequence(@RequestBody @Valid MatrixDto matrixDto) {
-        return longestSequenceFinder.findLongestSequence(matrixDto.getMatrix());
+    public String findLongestSequence(@RequestBody @Valid MatrixDto matrixDto) {
+        return "The longest sequence of 1's within a single row or column is: "
+                + longestSequenceFinder.findLongestSequence(matrixDto.getMatrix());
     }
 }
